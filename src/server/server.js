@@ -8,9 +8,23 @@ app.get('/', (req, res) => {
     console.log('root')
 })
 
+
 app.get('/movies', (req, res) => {
     console.log('movies')
     db.query("select * from sl_user", (err, data) => {
+        if (!err) {
+            //console.log(data)
+            res.send(data)
+        }
+        else {
+            console.log(err)
+        }
+    })
+})
+
+app.get('/board', (req, res) => {
+    console.log('/board')
+    db.query("select * from sl_board", (err, data) => {
         if (!err) {
             //console.log(data)
             res.send(data)
