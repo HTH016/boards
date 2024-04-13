@@ -1,43 +1,13 @@
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 4000;
-//const bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 const db = require('./config/db.js');
 
-app.get('/', (req, res) => {
-    console.log('root')
-})
 
 
-app.get('/movies', (req, res) => {
-    console.log('movies')
-    db.query("select * from sl_user", (err, data) => {
-        if (!err) {
-            //console.log(data)
-            res.send(data)
-        }
-        else {
-            console.log(err)
-        }
-    })
-})
 
-app.get('/board', (req, res) => {
-    console.log('/board')
-    db.query("select * from sl_board", (err, data) => {
-        if (!err) {
-            //console.log(data)
-            res.send(data)
-        }
-        else {
-            console.log(err)
-        }
-    })
-})
 
-app.listen(PORT, () => {
-    console.log(`http://localhost:${PORT}에서 서버 실행중`)
-})
 
 
 
@@ -62,13 +32,13 @@ const pool = mysql.createPool({
 /* ======================== ↑ ↑ ↑ Connect Database(MYSQL) ↑ ↑ ↑ ======================== */
 /* ======================== ↓ ↓ ↓ Option ↓ ↓ ↓ ======================== */
 
-/*
-const cors = require('cors')
+
+//const cors = require('cors')
 
 app.use(bodyParser.urlencoded({ extended : false }));
-app.use(cors());
+//app.use(cors());
 app.use(bodyParser.json());
-*/
+app.use(express.json());
 
 /* ======================== ↑ ↑ ↑ Option ↑ ↑ ↑ ======================== */
 /* ======================== ↓ ↓ ↓ Routings ↓ ↓ ↓ ======================== */
@@ -142,10 +112,72 @@ app.get('/appendgrade', (req, res) => {
     */
 
 
+app.get('/', (req, res) => {
+    console.log('root')
+})
+
+
+
+
+/* 로그인 */
+
+app.post("/process/login", (req, res) => {
+    var id = req.body.loginid;
+    var passwd = req.body.loginpasswd;
+
+    const sql = "select count(*) as 'cnt' from sl_user where id = ? and pw = ?;";
+    db.query(sql, [id, passwd], (err, result) => {
+        res.send(result);
+        console.log(result[0]);
+        if (result[0].cnt === 1) {
+        res.send({ message: "success" });
+        } else {
+        res.send({ message: "fail" });
+        }
+    })
+    });
+
+
+/* 회원 가입 */
+
+app.post("/userregister", (req, res) => {
+
+    /* 이메일, 전화번호, 프로필 사진 경로 가공 */
+    var emailinput = `${req.body.emailinput1}@${req.body.emailinput2}`
+    var telinput = `${req.body.telinput1}-${req.body.telinput2}-${req.body.telinput3}`
+    var profilepath;
+    if (req.body.profileinput === '') {
+        profilepath = 'default_profile.jpg';
+    } else {
+        profilepath = req.body.profileinput;
+    }
+
+
+    //
+    db.query(`INSERT INTO sl_user 
+    (user_id_name, user_passwd, user_nickname, user_name, usergrade, user_email, user_tel, user_reg_date, user_profile, user_point)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [req.body.idinput, req.body.passwdinput, req.body.nicknameinput, req.body.nameinput, 0,
+        emailinput, telinput, new Date(), profilepath, 0],
+        (err, data) => {
+            if (!err) {
+                res.send(data)
+                console.log(data)
+            }
+            else {
+                console.log(err)
+            }
+        })
+    });
+
+
 /* ======================== ↑ ↑ ↑ Routings ↑ ↑ ↑ ======================== */
 /* ======================== ↓ ↓ ↓ Connection Inspect ↓ ↓ ↓ ======================== */
 
 
+app.listen(PORT, () => {
+    console.log(`http://localhost:${PORT}에서 서버 실행중`)
+})
 
 
 
@@ -156,40 +188,31 @@ app.get('/appendgrade', (req, res) => {
 
 
 
+app.get('/movies', (req, res) => {
+    console.log('movies')
+    db.query("select * from sl_user", (err, data) => {
+        if (!err) {
+            //console.log(data)
+            res.send(data)
+        }
+        else {
+            console.log(err)
+        }
+    })
+})
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.get('/board', (req, res) => {
+    console.log('/board')
+    db.query("select * from sl_board", (err, data) => {
+        if (!err) {
+            //console.log(data)
+            res.send(data)
+        }
+        else {
+            console.log(err)
+        }
+    })
+})
 
 
 

@@ -10,9 +10,6 @@ ul{
 a{
   text-decoration: none;
 }
-.App{
-  width:1200px;
-  height: 700px;
-  background-color: aquamarine;
-  margin:0 auto;
+.App {
+  text-align: center;
 }
