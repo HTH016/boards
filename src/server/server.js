@@ -134,8 +134,8 @@ app.post("/process/login", (req, res) => {
         } else {
         res.send({ message: "fail" });
         }
-    })
     });
+});
 
 
 /* 회원 가입 */
@@ -168,6 +168,7 @@ app.post("/userregister", (req, res) => {
                 console.log(err)
             }
         })
+        res.redirect(303, '/');
     });
 
 
