@@ -125,14 +125,14 @@ app.post("/process/login", (req, res) => {
     var id = req.body.loginid;
     var passwd = req.body.loginpasswd;
 
-    const sql = "select count(*) as 'cnt' from sl_user where id = ? and pw = ?;";
+    const sql = "select count(*) as 'cnt' from sl_user where user_id_name = ? and user_passwd = ?;";
     db.query(sql, [id, passwd], (err, result) => {
-        res.send(result);
+        //res.send(result);
         console.log(result[0]);
         if (result[0].cnt === 1) {
-        res.send({ message: "success" });
+            return res.redirect(303, '/');
         } else {
-        res.send({ message: "fail" });
+            return;
         }
     });
 });
@@ -167,7 +167,7 @@ app.post("/userregister", (req, res) => {
             else {
                 console.log(err)
             }
-        })
+        });
         res.redirect(303, '/');
     });
 
