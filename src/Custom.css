@@ -1,0 +1,143 @@
+
+
+
+/* 상단바 안내 텍스트 */
+.show-nickname {
+    color: #FFFFFF8C;
+}
+
+
+/* Footer 디자인 */
+.card-header {
+    background-color: rgb(114, 114, 114);
+    color: rgb(88, 88, 88);
+}
+
+.card-body {
+    background-color: black;
+    color: white;
+}
+
+.card-text {
+    background-color: black;
+    color: white;
+}
+
+
+
+
+
+/* others */ 
+
+
+.custom {
+    margin: auto;
+    margin-top: 50px; 
+    margin-bottom: 10px; 
+    
+
+    width: 700px;
+    background-color: #EEEFF1;
+    border-radius: 35px;
+    text-align: center;
+    padding: 50px;
+  }
+
+  .custom-user {
+    margin: auto;
+    margin-top: 50px; 
+    margin-bottom: 10px; 
+    
+
+    width: 700px;
+    background-color: #EEEFF1;
+    border-radius: 35px;
+    text-align: center;
+    padding: 50px;
+  }
+
+  .custom-board {
+    margin: auto;
+    margin-top: 50px; 
+    margin-bottom: 10px; 
+    
+
+    width: 90%;
+    background-color: #EEEFF1;
+    border-radius: 35px;
+    text-align: center;
+    padding: 50px;
+  }
+  
+input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: none;
+  }
+  
+.in {
+    margin-bottom: 10px;
+  }
+  
+#btn {
+    background-color: #1BBC9B;
+    margin-bottom: 30px;
+    color: white;
+  }
+  
+a {
+    text-decoration: none;
+    color: #000000;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+.button {
+background-color: #1BBC9B;
+margin-bottom: 30px;
+color: white;
+}
+
+.post-list {
+    position: relative;
+    width: 80%;
+    height: 0;
+    padding-bottom: 100%;
+    margin: auto;
+  }
+
+
+  .enter-post-list {
+    align-self: flex-start;
+
+}
+
+.tiny-list-border {
+    border-color: #1BBC9B;
+    border-width: 3px;
+    border-radius: 5px;
+    }
+
+.left-word {
+    text-align: left;
+}
+
+.valid-warn {
+    color: red;
+    font-size: 12px;
+}
+
+.var-border {
+    border: 5px solid #1BBC9B;
+    border-radius: 15px;
+}
+
+.button-container {
+  display: flex;
+}
+
+.button {
+  margin-right: 10px; /* 각 버튼 사이의 간격 조정 */
+}

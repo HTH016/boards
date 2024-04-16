@@ -7,7 +7,7 @@ import PrevPostList from './../components/PrevPostList.js';
 import axios from 'axios';
 import '../css/Post.css';
 
-function Post(props) {
+function Comment(props) {
     return (
 
         <div>
@@ -25,19 +25,11 @@ function Post(props) {
             <span>
                 {props.post.board_num}
             </span>
-            <span 
-        style={{textDecoration: 'underline', cursor: 'pointer'}}
-        onClick={() => {
-            const url = `/postdetail/${props.post.board_id}`;
-            // 페이지를 해당 URL로 이동
-            window.location.href = url;
-        }}
-    >
+            <Link to="">
+            <span>
                 {props.post.board_title}
-            
             </span>
-         
-            
+            </Link>
             <span>
                 {props.post.user_id}
             </span>
@@ -63,4 +55,4 @@ function Post(props) {
     )
 }
 
-export default Post;
+export default Comment;

@@ -20,6 +20,7 @@ function Pagination(props) {
     }
 
     return (
+        
         <div id='pagination'>
             <div id='pagination-inner'>
                 {result}

@@ -17,100 +17,51 @@ import WithHeaderExample from './components/footer.js';
 
 import MainUI from './routes/main.js';
 import {LoginUI, RegisterUI, FindAccountUI} from './routes/login.js';
+import PostListUI from './routes/postlist.js';
+import PostWriteUI from './routes/postwrite.js';
+import PostDetailUI from './routes/postdetail.js';
+import PostModifyUI from './routes/postmodify.js';
+import MyPageUI from './routes/mypage.js';
 
 
 function App() {
 
-
-
-
-  const [boardList, setBoardList] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
-  const [boardPerPage, setBoardPerPage] = useState(5)
-
-
-  useEffect(() => {
-    getBoard()
-  }, [])
-
-  const selectAll = async() => {
-    alert("selectAll!")
-    const result = await axios.get('/movies')
-    console.log(result)
-  }
-
-  const getBoard = async() => {
-    //alert('getboard!')
-    const result = await axios('/board')
-    console.log(result)
-    console.log(result.data)
-    setBoardList(result.data)
-  }
-
-  const currentBoardList = (boardList) => {
-    //alert('getboard!')
-    const startIndex = (currentPage - 1) * boardPerPage;
-    const endIndex = startIndex + boardPerPage;
-    const slicedList = boardList.slice(startIndex, endIndex)
-    return slicedList;
-  }
-
-
+  let sessionId = sessionStorage.getItem('userId');
+  console.log(sessionStorage.getItem('userId'))
   return (
     
     <div className="App">
-      {/*
-        <h1> React-Express-MySQL 연결 </h1>
-        <button onClick={selectAll}> 모두 조회 </button>
-  
-      <button onClick={getBoard}> 게시판 글 모두 조회 </button>
-  */}
-    <NavBar/>
 
+      
+      
+    <NavBar isLoggedIn={sessionId}/>
+    
     <Routes>
       <Route path="/" element={ <div><MainUI/></div> } />
       <Route path="/main" element={ <div><MainUI/></div> } />
       
-      <Route path="/login" element={ <div><LoginUI/></div> } />
+      <Route path="/loginform" element={ <div><LoginUI/></div> } /> 
       <Route path="/register" element={ <div><RegisterUI/></div> } />
       <Route path="/findaccount" element={ <div><FindAccountUI/></div> } />
-    
+      <Route path="/mypage/:myid" element={ <div><MyPageUI/></div> } />
+
+      <Route path="/postlist/:category" element={ <div><PostListUI /></div> } />
+      <Route path="/postdetail/:post" element={ <div><PostDetailUI/></div> } />
+      <Route path="/postwrite/:category" element={ <div><PostWriteUI/></div> } />
+      <Route path="/postmodify/:post" element={ <div><PostModifyUI/></div> } />
+      {/*
+      <Route path="/postdelete/:post" element={ <div><PostDeleteUI/></div> } />
+  */}
     </Routes>
-
-
-
-
-
-      <div> FOR DEBUGGING TEST 
-      FOR DEBUGGING TEST 
-      FOR DEBUGGING TEST 
-      FOR DEBUGGING TEST 
-      FOR DEBUGGING TEST 
-      FOR DEBUGGING TEST 
-      FOR DEBUGGING TEST 
-      FOR DEBUGGING TEST  </div>
-
-      <PostList boardList={currentBoardList(boardList)}/>
-      <Pagination 
-      total={boardList.length} 
-      boardPerPage={boardPerPage}
-      setCurrentPage={setCurrentPage}/>
-
-      <div> FOR DEBUGGING TEST 
-      FOR DEBUGGING TEST 
-      FOR DEBUGGING TEST 
-      FOR DEBUGGING TEST 
-      FOR DEBUGGING TEST 
-      FOR DEBUGGING TEST 
-      FOR DEBUGGING TEST 
-      FOR DEBUGGING TEST  </div>
-
 
     <WithHeaderExample/>
       </div>
   
-
   );
 }
 
 export default App;
+
+
+
+

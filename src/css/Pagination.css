@@ -1,9 +1,4 @@
-#pagination{
-    width : 100%;
-    height : 10%;
-    background-color : rgb(255, 127, 148);
-    text-align: center;
-  }
+
 
 #pagination>#pagination-inner{
     display:inline-block;
